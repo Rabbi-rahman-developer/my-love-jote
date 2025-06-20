@@ -6,6 +6,14 @@
   <title>রাব্বি ❤️ জ্যোতি</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet" />
+
+  <!-- SEO & Social Meta -->
+  <meta name="description" content="রাব্বি ❤️ জ্যোতির জন্য ভালোবাসার ওয়েবসাইট">
+  <meta property="og:title" content="রাব্বি ❤️ জ্যোতি">
+  <meta property="og:description" content="ভালোবাসা, অনুভব, ও মধুর মুহূর্তের অনন্য প্রকাশ">
+  <meta property="og:image" content="images/jote.jpg">
+  <meta property="og:type" content="website">
+
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -106,8 +114,6 @@
       margin: 0;
       line-height: 1.6;
     }
-
-    /* Glow animation for image */
     @keyframes glow {
       0% {
         box-shadow: 0 0 10px rgba(255, 105, 180, 0.6),
@@ -176,7 +182,6 @@
     Created with ❤️ by রাব্বি
   </footer>
 
-  <!-- Modal -->
   <div id="modal" class="modal-bg" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalDesc">
     <div class="modal">
       <button class="close-btn" aria-label="Close modal">&times;</button>
@@ -190,7 +195,6 @@
     </div>
   </div>
 
-  <!-- Audio element -->
   <audio id="loveMusic" src="music/love-song.mp3" autoplay loop></audio>
 
   <script>
@@ -202,7 +206,6 @@
     const music = document.getElementById('loveMusic');
     const musicToggle = document.getElementById('musicToggle');
 
-    // ফুলের ইমোজি লিস্ট, গোলাপ বেশি রাখতে একাধিক "🌹"
     const flowerEmojis = ["🌹", "🌹", "🌸", "🌷", "💖", "❤️", "🌺", "🥀", "🌹"];
 
     function createFlower() {
@@ -214,43 +217,38 @@
       flower.style.top = "-60px";
       flower.textContent = flowerEmojis[Math.floor(Math.random() * flowerEmojis.length)];
       flowerContainer.appendChild(flower);
-
-      setTimeout(() => {
-        flower.remove();
-      }, 10000);
+      setTimeout(() => flower.remove(), 10000);
     }
 
     function startFlowerRain() {
       document.body.style.background = "linear-gradient(135deg, #ffd6e7 0%, #ffe0f0 100%)";
-
       loveBtn.disabled = true;
       loveBtn.textContent = "ভালোবাসা গ্রহণ হয়েছে 💖";
-
       let count = 0;
-      const maxFlowers = 60;
+      const maxFlowers = window.innerWidth < 768 ? 30 : 60;
       const interval = setInterval(() => {
         createFlower();
         count++;
         if (count >= maxFlowers) clearInterval(interval);
       }, 180);
-
       setTimeout(() => {
         modal.classList.add("active");
+        music.volume = 0.3;
       }, 2000);
     }
 
     loveBtn.addEventListener("click", startFlowerRain);
     closeBtn.addEventListener("click", () => {
       modal.classList.remove("active");
+      music.volume = 1;
     });
-
     modal.addEventListener("click", e => {
       if (e.target === modal) {
         modal.classList.remove("active");
+        music.volume = 1;
       }
     });
 
-    // মিউজিক চালু-বাতিল করার বাটন ইভেন্ট
     musicToggle.addEventListener('click', () => {
       if (music.paused) {
         music.play();
@@ -261,7 +259,6 @@
       }
     });
 
-    // Optional: auto flowers on page load (15 ফুল)
     window.addEventListener("DOMContentLoaded", () => {
       let count = 0;
       const interval = setInterval(() => {
